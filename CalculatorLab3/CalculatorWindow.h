@@ -24,9 +24,12 @@ private:
 	wxButton* decBtn = nullptr;
 	wxButton* modBtn = nullptr;
 	wxButton* negatBtn = nullptr;
+	std::vector<wxButton*> buttons;
+	std::vector<double> numbers;
 public:
 	CalculatorWindow();
-
+	void OnButtonClicked(wxCommandEvent& evt);
+	void saveValues(wxString toSave);
 	wxDECLARE_EVENT_TABLE();
 };
 
