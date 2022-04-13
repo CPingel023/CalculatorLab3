@@ -30,6 +30,7 @@ public:
 	CalculatorWindow();
 	void OnButtonClicked(wxCommandEvent& evt);
 	void saveValues(wxString toSave);
+	void Calculate();
 	wxDECLARE_EVENT_TABLE();
 };
 

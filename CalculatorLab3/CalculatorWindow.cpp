@@ -91,31 +91,7 @@ void CalculatorWindow::OnButtonClicked(wxCommandEvent& evt)
 		switch (cases) {
 		case 10: 
 		{
-			if(numbers.size()>= 3){
-				while (numbers.size() >= 3) {
-					if (numbers[1] == 14)
-					{
-						numbers[0] = numbers[0] + numbers[2];
-					}
-					else if (numbers[1] == 15) {
-						numbers[0] = numbers[0] - numbers[2];
-					}
-					else if (numbers[1] == 16) {
-						numbers[0] = numbers[0] * numbers[2];
-					}
-					else if (numbers[1] == 17) {
-						numbers[0] = numbers[0] / numbers[2];
-					}
-					else if (numbers[1] == 18) {
-						numbers[0] = (int)numbers[0]%(int)numbers[2];
-					}
-					numbers.erase(std::next(numbers.begin(), 1), std::next(numbers.begin(), 3));
-				}
-			}
-			else if (numbers.size() == 2) {
-
-			}
-			*textWindow << numbers[0];
+			Calculate();
 			break;
 		}
 		case 11:
@@ -136,6 +112,9 @@ void CalculatorWindow::OnButtonClicked(wxCommandEvent& evt)
 		case 14:
 		{
 			numbers.push_back(14);
+			if (numbers.size() > 3) {
+				Calculate();
+			}
 			break;
 		}
 		case 15:
@@ -176,6 +155,41 @@ void CalculatorWindow::saveValues(wxString toSave)
 	}
 	numbers.push_back(value);
 	textWindow->Clear();
+}
+
+void CalculatorWindow::Calculate()
+{
+	if (numbers.size() >= 3) {
+		while (numbers.size() >= 3) {
+			if (numbers[1] == 14)
+			{
+				numbers[0] = numbers[0] + numbers[2];
+			}
+			else if (numbers[1] == 15) {
+				numbers[0] = numbers[0] - numbers[2];
+			}
+			else if (numbers[1] == 16) {
+				numbers[0] = numbers[0] * numbers[2];
+			}
+			else if (numbers[1] == 17) {
+				numbers[0] = numbers[0] / numbers[2];
+			}
+			else if (numbers[1] == 18) {
+				numbers[0] = (int)numbers[0] % (int)numbers[2];
+			}
+			numbers.erase(std::next(numbers.begin(), 1), std::next(numbers.begin(), 3));
+		}
+	}
+	else if (numbers.size() == 2) {
+
+	}
+
+	if (numbers[0] == (int)numbers[0]) {
+		*textWindow << (int)numbers[0];
+	}
+	else {
+		*textWindow << numbers[0];
+	}
 }
 
 
