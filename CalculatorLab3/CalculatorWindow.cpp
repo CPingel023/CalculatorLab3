@@ -11,7 +11,8 @@ CalculatorWindow::CalculatorWindow() : wxFrame(nullptr, wxID_ANY, "Calculator Wi
 {
 	wxFont fontTextBox(24, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRAHEAVY, false);
 	wxFont fontButtons(18, wxFONTFAMILY_DECORATIVE, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
-	textWindow = new wxTextCtrl(this, 125, "", wxPoint(0, 0), wxSize(500, 130), wxTE_RIGHT);
+	textWindow = new wxTextCtrl(this, 125, "0", wxPoint(0, 0), wxSize(375, 130), wxTE_RIGHT);
+	clearBtn = new wxButton(this, 20, "Clear", wxPoint(375, 0), wxSize(125, 130));
 	textWindow->SetFont(fontTextBox);
 	textWindow->SetBackgroundColour(wxColour(*wxBLACK));
 	textWindow->SetForegroundColour(wxColour(255, 255, 255, 0));
@@ -62,6 +63,7 @@ CalculatorWindow::CalculatorWindow() : wxFrame(nullptr, wxID_ANY, "Calculator Wi
 	buttons.push_back(minusBtn);
 	buttons.push_back(multiplBtn);
 	buttons.push_back(divBtn);
+	buttons.push_back(clearBtn);
 	
 	for (int i = 0; i < buttons.size(); i++) {
 		buttons[i]->SetFont(fontButtons);
@@ -81,13 +83,22 @@ CalculatorWindow::CalculatorWindow() : wxFrame(nullptr, wxID_ANY, "Calculator Wi
 
 void CalculatorWindow::OnButtonClicked(wxCommandEvent& evt)
 {
+	if (prevButton == 10) {
+		textWindow->Clear();
+		numbers.clear();
+		operands.clear();
+	}
 	int cases = evt.GetId();
+	prevButton = cases;
 	if (cases < 10) {
 		*textWindow << cases;
+		
 	}
 	else {
 		wxString textVal = textWindow->GetValue();
-		saveValues(textVal);
+		operands.push_back(evt.GetId());
+		float value = saveValues(textVal);
+		numbers.push_back(value);
 		switch (cases) {
 		case 10: 
 		{
@@ -96,7 +107,7 @@ void CalculatorWindow::OnButtonClicked(wxCommandEvent& evt)
 		}
 		case 11:
 		{
-
+			
 			break;
 		}
 		case 12:
@@ -111,36 +122,58 @@ void CalculatorWindow::OnButtonClicked(wxCommandEvent& evt)
 		}
 		case 14:
 		{
-			numbers.push_back(14);
 			if (numbers.size() > 3) {
 				Calculate();
 			}
+			*textWindow << " + ";
 			break;
 		}
 		case 15:
 		{
-			numbers.push_back(15);
+			if (numbers.size() > 3) {
+				Calculate();
+			}
+			*textWindow << " - ";
 			break;
 		}
 		case 16:
 		{
-			numbers.push_back(16);
+			if (numbers.size() > 3) {
+				Calculate();
+			}
+			*textWindow << " * ";
 			break;
 		}
 		case 17:
 		{
-			numbers.push_back(17);
+			if (numbers.size() > 3) {
+				Calculate();
+			}
+			*textWindow << " / ";
 			break;
 		}
 		case 18:
 		{
-
+			if (numbers.size() > 3) {
+				Calculate();
+			}
+			*textWindow << " % ";
 			break;
 		}
 		case 19:
 		{
-
+			//textWindow->Clear();
+			textWindow->Clear();
+			numbers[0] = numbers[0] * -1;
+			*textWindow << numbers[0];
 			break;
+		}
+		case 20: 
+		{
+			saveValues(textVal);
+			textWindow->Clear();
+			numbers.clear();
+			operands.clear();
 		}
 		evt.Skip();
 		}
@@ -148,47 +181,50 @@ void CalculatorWindow::OnButtonClicked(wxCommandEvent& evt)
 	
 }
 
-void CalculatorWindow::saveValues(wxString toSave)
+float CalculatorWindow::saveValues(wxString toSave)
 {
 	double value;
 	if (!toSave.ToDouble(&value)) {
 	}
-	numbers.push_back(value);
-	textWindow->Clear();
+	return value;
 }
 
 void CalculatorWindow::Calculate()
 {
+
+	
 	if (numbers.size() >= 3) {
 		while (numbers.size() >= 3) {
-			if (numbers[1] == 14)
+			if (operands[0] == 14)
 			{
-				numbers[0] = numbers[0] + numbers[2];
+				numbers[0] = numbers[0] + numbers[1];
+				
 			}
-			else if (numbers[1] == 15) {
-				numbers[0] = numbers[0] - numbers[2];
+			else if (operands[0] == 15) {
+				numbers[0] = numbers[0] - numbers[1];
+
 			}
-			else if (numbers[1] == 16) {
-				numbers[0] = numbers[0] * numbers[2];
+			else if (operands[0] == 16) {
+				numbers[0] = numbers[0] * numbers[1];
 			}
-			else if (numbers[1] == 17) {
-				numbers[0] = numbers[0] / numbers[2];
+			else if (operands[0] == 17) {
+				numbers[0] = numbers[0] / numbers[1];
 			}
-			else if (numbers[1] == 18) {
-				numbers[0] = (int)numbers[0] % (int)numbers[2];
+			else if (operands[0] == 18) {
+				numbers[0] = (int)numbers[0] % (int)numbers[1];
 			}
 			numbers.erase(std::next(numbers.begin(), 1), std::next(numbers.begin(), 3));
 		}
+		*textWindow << " = ";
+		if (numbers[0] == (int)numbers[0]) {
+			*textWindow << (int)numbers[0];
+		}
+		else {
+			*textWindow << numbers[0];
+		}
 	}
-	else if (numbers.size() == 2) {
+	else if (numbers.size() <= 2) {
 
-	}
-
-	if (numbers[0] == (int)numbers[0]) {
-		*textWindow << (int)numbers[0];
-	}
-	else {
-		*textWindow << numbers[0];
 	}
 }
 
