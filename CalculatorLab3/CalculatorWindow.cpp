@@ -107,17 +107,17 @@ void CalculatorWindow::OnButtonClicked(wxCommandEvent& evt)
 		}
 		case 11:
 		{
-			
+			*textWindow << " binary ";
 			break;
 		}
 		case 12:
 		{
-
+			*textWindow << " hexadecimal ";
 			break;
 		}
 		case 13:
 		{
-
+			*textWindow << " decimal ";
 			break;
 		}
 		case 14:
