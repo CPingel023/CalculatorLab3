@@ -91,7 +91,8 @@ void CalculatorWindow::OnButtonClicked(wxCommandEvent& evt)
 		switch (cases) {
 		case 10: 
 		{
-			while (numbers.size() >= 3) {
+			if(numbers.size()>= 3){
+				while (numbers.size() >= 3) {
 					if (numbers[1] == 14)
 					{
 						numbers[0] = numbers[0] + numbers[2];
@@ -105,8 +106,14 @@ void CalculatorWindow::OnButtonClicked(wxCommandEvent& evt)
 					else if (numbers[1] == 17) {
 						numbers[0] = numbers[0] / numbers[2];
 					}
+					else if (numbers[1] == 18) {
+						numbers[0] = (int)numbers[0]%(int)numbers[2];
+					}
 					numbers.erase(std::next(numbers.begin(), 1), std::next(numbers.begin(), 3));
-				
+				}
+			}
+			else if (numbers.size() == 2) {
+
 			}
 			*textWindow << numbers[0];
 			break;
