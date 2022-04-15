@@ -191,10 +191,7 @@ float CalculatorWindow::saveValues(wxString toSave)
 
 void CalculatorWindow::Calculate()
 {
-
-	
-	if (numbers.size() >= 3) {
-		while (numbers.size() >= 3) {
+		while (numbers.size() > 1) {
 			if (operands[0] == 14)
 			{
 				numbers[0] = numbers[0] + numbers[1];
@@ -214,6 +211,7 @@ void CalculatorWindow::Calculate()
 				numbers[0] = (int)numbers[0] % (int)numbers[1];
 			}
 			numbers.erase(std::next(numbers.begin(), 1), std::next(numbers.begin(), 3));
+			//operands.erase(operands.begin());
 		}
 		*textWindow << " = ";
 		if (numbers[0] == (int)numbers[0]) {
@@ -222,10 +220,6 @@ void CalculatorWindow::Calculate()
 		else {
 			*textWindow << numbers[0];
 		}
-	}
-	else if (numbers.size() <= 2) {
-
-	}
 }
 
 
