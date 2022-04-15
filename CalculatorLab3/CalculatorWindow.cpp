@@ -1,5 +1,5 @@
 #include "CalculatorWindow.h"
-
+#include "ButtonFactory.h"
 
 wxBEGIN_EVENT_TABLE(CalculatorWindow,wxFrame)
 	EVT_BUTTON(wxID_ANY, OnButtonClicked)
@@ -11,36 +11,37 @@ CalculatorWindow::CalculatorWindow() : wxFrame(nullptr, wxID_ANY, "Calculator Wi
 {
 	wxFont fontTextBox(24, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRAHEAVY, false);
 	wxFont fontButtons(18, wxFONTFAMILY_DECORATIVE, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
+	ButtonFactory creator = ButtonFactory(this);
 	textWindow = new wxTextCtrl(this, 125, "0", wxPoint(0, 0), wxSize(375, 130), wxTE_RIGHT);
-	clearBtn = new wxButton(this, 20, "Clear", wxPoint(375, 0), wxSize(125, 130));
+	
 	textWindow->SetFont(fontTextBox);
 	textWindow->SetBackgroundColour(wxColour(*wxBLACK));
 	textWindow->SetForegroundColour(wxColour(255, 255, 255, 0));
-	equalBtn = new wxButton(this, 10, "=", wxPoint(0, 130), wxSize(125, 130));
-	equalBtn->SetFont(fontButtons);
-	binBtn = new wxButton(this, 11, "bin", wxPoint(125, 130), wxSize(125, 130));
-	hexBtn = new wxButton(this, 12, "hex", wxPoint(250, 130), wxSize(125, 130));
-	decBtn = new wxButton(this, 13, "dec", wxPoint(375, 130), wxSize(125, 130));
+	equalBtn = creator.createEqualButton();
+	clearBtn = creator.createClearButton();
+	binBtn = creator.createBinButton();
+	hexBtn = creator.createHexButton();
+	decBtn = creator.createDecButton();
 
-	plusBtn = new wxButton(this, 14, "+", wxPoint(0, 260), wxSize(125, 130));
-	sevenBtn = new wxButton(this, 7, "7", wxPoint(125, 260), wxSize(125, 130));
-	eightBtn = new wxButton(this, 8, "8", wxPoint(250, 260), wxSize(125, 130));
-	nineBtn = new wxButton(this, 9, "9", wxPoint(375, 260), wxSize(125, 130));
+	plusBtn = creator.createAddButton();
+	sevenBtn = creator.createSevenButton();
+	eightBtn = creator.createEightButton();
+	nineBtn = creator.createNineButton();
 
-	minusBtn = new wxButton(this, 15, "-", wxPoint(0, 390), wxSize(125, 130));
-	fourBtn = new wxButton(this, 4, "4", wxPoint(125, 390), wxSize(125, 130));
-	fiveBtn = new wxButton(this, 5, "5", wxPoint(250, 390), wxSize(125, 130));
-	sixBtn = new wxButton(this, 6, "6", wxPoint(375, 390), wxSize(125, 130));
+	minusBtn = creator.createMinusButton();
+	fourBtn = creator.createFourButton();
+	fiveBtn = creator.createFiveButton();
+	sixBtn = creator.createSixButton();
 
-	multiplBtn = new wxButton(this, 16, "*", wxPoint(0, 520), wxSize(125, 130));
-	threeBtn = new wxButton(this, 3, "3", wxPoint(125, 520), wxSize(125, 130));
-	twoBtn = new wxButton(this, 2, "2", wxPoint(250, 520), wxSize(125, 130));
-	oneBtn = new wxButton(this, 1, "1", wxPoint(375, 520), wxSize(125, 130));
+	multiplBtn = creator.createMultiplButton();
+	threeBtn = creator.createThreeButton();
+	twoBtn = creator.createTwoButton();
+	oneBtn = creator.createOneButton();
 
-	divBtn = new wxButton(this, 17, "/", wxPoint(0, 650), wxSize(125, 130));
-	modBtn = new wxButton(this, 18, "%", wxPoint(125, 650), wxSize(125, 130));
-	zeroBtn = new wxButton(this, 0, "0", wxPoint(250, 650), wxSize(125, 130));
-	negatBtn = new wxButton(this, 19, "+/-", wxPoint(375, 650), wxSize(125, 130));
+	divBtn = creator.createDivButton();
+	modBtn = creator.createModButton();
+	zeroBtn = creator.createZeroButton();
+	negatBtn = creator.createNegatButton();
 	buttons.push_back(zeroBtn);
 	buttons.push_back(oneBtn);
 	buttons.push_back(twoBtn);
