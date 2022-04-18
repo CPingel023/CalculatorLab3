@@ -12,10 +12,10 @@ CalculatorWindow::CalculatorWindow() : wxFrame(nullptr, wxID_ANY, "Calculator Wi
 	wxFont fontTextBox(24, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRAHEAVY, false);
 	ButtonFactory creator = ButtonFactory(this);
 	textWindow = new wxTextCtrl(this, 125, "0", wxPoint(0, 0), wxSize(375, 130), wxTE_RIGHT);
-	
 	textWindow->SetFont(fontTextBox);
 	textWindow->SetBackgroundColour(wxColour(*wxBLACK));
 	textWindow->SetForegroundColour(wxColour(255, 255, 255, 0));
+	
 	equalBtn = creator.createEqualButton();
 	clearBtn = creator.createClearButton();
 	binBtn = creator.createBinButton();
