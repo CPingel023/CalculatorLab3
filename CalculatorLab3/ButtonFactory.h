@@ -1,11 +1,13 @@
 #pragma once
 #include "wx/wx.h"
 #include "CalculatorWindow.h"
+
 class ButtonFactory
 {
 private:
 	CalculatorWindow* calcWindow = nullptr;
 public:
+	
 	ButtonFactory(CalculatorWindow* _tempWind);
 	~ButtonFactory();
 	wxButton* createZeroButton();

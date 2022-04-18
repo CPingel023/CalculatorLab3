@@ -10,7 +10,6 @@ wxEND_EVENT_TABLE()
 CalculatorWindow::CalculatorWindow() : wxFrame(nullptr, wxID_ANY, "Calculator Window", wxPoint(200, 200), wxSize(515, 820))
 {
 	wxFont fontTextBox(24, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRAHEAVY, false);
-	wxFont fontButtons(18, wxFONTFAMILY_DECORATIVE, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
 	ButtonFactory creator = ButtonFactory(this);
 	textWindow = new wxTextCtrl(this, 125, "0", wxPoint(0, 0), wxSize(375, 130), wxTE_RIGHT);
 	
@@ -42,43 +41,6 @@ CalculatorWindow::CalculatorWindow() : wxFrame(nullptr, wxID_ANY, "Calculator Wi
 	modBtn = creator.createModButton();
 	zeroBtn = creator.createZeroButton();
 	negatBtn = creator.createNegatButton();
-	buttons.push_back(zeroBtn);
-	buttons.push_back(oneBtn);
-	buttons.push_back(twoBtn);
-	buttons.push_back(threeBtn);
-	buttons.push_back(fourBtn);
-	buttons.push_back(fiveBtn);
-	buttons.push_back(sixBtn);
-	buttons.push_back(sevenBtn);
-	buttons.push_back(eightBtn);
-	buttons.push_back(nineBtn);
-
-	buttons.push_back(binBtn);
-	buttons.push_back(hexBtn);
-	buttons.push_back(decBtn);
-	buttons.push_back(modBtn);
-	buttons.push_back(negatBtn);
-
-	buttons.push_back(equalBtn);
-	buttons.push_back(plusBtn);
-	buttons.push_back(minusBtn);
-	buttons.push_back(multiplBtn);
-	buttons.push_back(divBtn);
-	buttons.push_back(clearBtn);
-	
-	for (int i = 0; i < buttons.size(); i++) {
-		buttons[i]->SetFont(fontButtons);
-		buttons[i]->SetOwnForegroundColour(wxColour(255, 255, 255, 0));
-		if (i >= 0 && i <= 9) {
-			buttons[i]->SetBackgroundColour(wxColour(78, 2, 80, 0));
-		}
-		else if (i > 9 && i <= 14) {
-			buttons[i]->SetBackgroundColour(wxColour(152, 223, 175, 0));
-		}
-		else {
-			buttons[i]->SetBackgroundColour(wxColour(202, 46, 85, 0));
-		}
-	}
 
 }
 
