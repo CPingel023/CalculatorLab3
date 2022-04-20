@@ -30,6 +30,7 @@ private:
 	std::vector<double> numbers;
 	std::vector<int> operands;
 	int prevButton = 0;
+	CalculatorProcessor* processor = nullptr;
 public:
 	CalculatorWindow();
 	void OnButtonClicked(wxCommandEvent& evt);

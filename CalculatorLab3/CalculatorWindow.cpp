@@ -2,14 +2,14 @@
 #include "ButtonFactory.h"
 
 wxBEGIN_EVENT_TABLE(CalculatorWindow,wxFrame)
-	EVT_BUTTON(wxID_ANY, OnButtonClicked())
+	EVT_BUTTON(wxID_ANY, OnButtonClicked)
 
 wxEND_EVENT_TABLE()
 
 
 CalculatorWindow::CalculatorWindow() : wxFrame(nullptr, wxID_ANY, "Calculator Window", wxPoint(200, 200), wxSize(515, 820))
 {
-	CalculatorProcessor* processor = &CalculatorProcessor::GetInstance();
+	processor = &CalculatorProcessor::GetInstance();
 	ButtonFactory creator = ButtonFactory(this);	
 	equalBtn = creator.createEqualButton();
 	clearBtn = creator.createClearButton();
@@ -44,6 +44,7 @@ CalculatorWindow::CalculatorWindow() : wxFrame(nullptr, wxID_ANY, "Calculator Wi
 #pragma region Calculation
 void CalculatorWindow::OnButtonClicked(wxCommandEvent& evt)
 {
+	processor->ChangeTextBox(evt.GetId());
 	if (prevButton == 10) {
 		textWindow->Clear();
 		numbers.clear();
