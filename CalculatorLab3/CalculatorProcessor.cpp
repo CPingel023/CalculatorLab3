@@ -20,10 +20,13 @@ void CalculatorProcessor::CreateTextWindow(CalculatorWindow* parent)
 
 void CalculatorProcessor::ChangeTextBox(int id)
 {
-	if (prevButton == 10) {
+	if (prevButton >= 10) {
+		if (prevButton == 10) {
 		textWindow->Clear();
-		numbers.clear();
-		operands.clear();
+			numbers.clear();
+			operands.clear();
+			
+		}
 	}
 	int cases = id;
 	prevButton = cases;
@@ -33,9 +36,10 @@ void CalculatorProcessor::ChangeTextBox(int id)
 	}
 	else {
 		wxString textVal = textWindow->GetValue();
-		operands.push_back(evt.GetId());
-		float value = saveValues(textVal);
+		operands.push_back(id);
+		float value = SaveValues(textVal);
 		numbers.push_back(value);
+		textWindow->Clear();
 		switch (cases) {
 		case 10:
 		{
@@ -107,7 +111,7 @@ void CalculatorProcessor::ChangeTextBox(int id)
 		}
 		case 20:
 		{
-			saveValues(textVal);
+			SaveValues(textVal);
 			textWindow->Clear();
 			numbers.clear();
 			operands.clear();
@@ -121,5 +125,41 @@ void CalculatorProcessor::ChangeTextBox(int id)
 
 void CalculatorProcessor::Calculate()
 {
+	while (numbers.size() > 1) {
+		if (operands[0] == 14)
+		{
+			numbers[0] = numbers[0] + numbers[1];
 
+		}
+		else if (operands[0] == 15) {
+			numbers[0] = numbers[0] - numbers[1];
+
+		}
+		else if (operands[0] == 16) {
+			numbers[0] = numbers[0] * numbers[1];
+		}
+		else if (operands[0] == 17) {
+			numbers[0] = numbers[0] / numbers[1];
+		}
+		else if (operands[0] == 18) {
+			numbers[0] = (int)numbers[0] % (int)numbers[1];
+		}
+		numbers.erase(std::next(numbers.begin(), 1), std::next(numbers.begin(), 2));
+		operands.erase(operands.begin());
+	}
+	*textWindow << " = ";
+	if (numbers[0] == (int)numbers[0]) {
+		*textWindow << (int)numbers[0];
+	}
+	else {
+		*textWindow << numbers[0];
+	}
+}
+
+double CalculatorProcessor::SaveValues(wxString toSave)
+{
+	double value;
+	if (!toSave.ToDouble(&value)) {
+	}
+	return value;
 }
