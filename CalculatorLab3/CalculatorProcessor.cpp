@@ -66,7 +66,6 @@ void CalculatorProcessor::ChangeTextBox(int id)
 			if (numbers.size() > 3) {
 				Calculate();
 			}
-			*textWindow << " + ";
 			break;
 		}
 		case 15:
@@ -74,7 +73,6 @@ void CalculatorProcessor::ChangeTextBox(int id)
 			if (numbers.size() > 3) {
 				Calculate();
 			}
-			*textWindow << " - ";
 			break;
 		}
 		case 16:
@@ -82,7 +80,6 @@ void CalculatorProcessor::ChangeTextBox(int id)
 			if (numbers.size() > 3) {
 				Calculate();
 			}
-			*textWindow << " * ";
 			break;
 		}
 		case 17:
@@ -90,7 +87,6 @@ void CalculatorProcessor::ChangeTextBox(int id)
 			if (numbers.size() > 3) {
 				Calculate();
 			}
-			*textWindow << " / ";
 			break;
 		}
 		case 18:
@@ -98,7 +94,6 @@ void CalculatorProcessor::ChangeTextBox(int id)
 			if (numbers.size() > 3) {
 				Calculate();
 			}
-			*textWindow << " % ";
 			break;
 		}
 		case 19:
@@ -116,7 +111,6 @@ void CalculatorProcessor::ChangeTextBox(int id)
 			numbers.clear();
 			operands.clear();
 		}
-		evt.Skip();
 		}
 	}
 
