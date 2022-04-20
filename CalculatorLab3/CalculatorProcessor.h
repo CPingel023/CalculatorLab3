@@ -13,7 +13,9 @@ public:
 	}
 private:
 	wxTextCtrl* textWindow = nullptr;
-
+	std::vector<double> numbers;
+	std::vector<int> operands;
+	int prevButton = 0;
 public:
 	CalculatorProcessor();
 	CalculatorProcessor(CalculatorProcessor const&) = delete;
@@ -21,5 +23,6 @@ public:
 	void CreateTextWindow(CalculatorWindow* parent);
 	void ChangeTextBox(int id);
 	void Calculate();
+	double SaveValues(wxString toSave);
 };
 

@@ -27,15 +27,10 @@ private:
 	wxButton* negatBtn = nullptr;
 	wxButton* clearBtn = nullptr;
 	std::vector<wxButton*> buttons;
-	std::vector<double> numbers;
-	std::vector<int> operands;
-	int prevButton = 0;
 	CalculatorProcessor* processor = nullptr;
 public:
 	CalculatorWindow();
 	void OnButtonClicked(wxCommandEvent& evt);
-	float saveValues(wxString toSave);
-	void Calculate();
 	wxDECLARE_EVENT_TABLE();
 };
 
