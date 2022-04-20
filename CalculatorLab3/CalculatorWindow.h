@@ -1,5 +1,6 @@
 #pragma once
 #include "wx/wx.h"
+#include "CalculatorProcessor.h"
 class CalculatorWindow : public wxFrame
 {
 private:
