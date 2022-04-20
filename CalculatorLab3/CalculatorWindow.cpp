@@ -40,6 +40,8 @@ CalculatorWindow::CalculatorWindow() : wxFrame(nullptr, wxID_ANY, "Calculator Wi
 
 }
 
+
+#pragma region Calculation
 void CalculatorWindow::OnButtonClicked(wxCommandEvent& evt)
 {
 	if (prevButton == 10) {
@@ -139,6 +141,7 @@ void CalculatorWindow::OnButtonClicked(wxCommandEvent& evt)
 	}
 	
 }
+#pragma endregion
 
 float CalculatorWindow::saveValues(wxString toSave)
 {
