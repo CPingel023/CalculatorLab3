@@ -22,10 +22,9 @@ void CalculatorProcessor::ChangeTextBox(int id)
 {
 	if (prevButton >= 10) {
 		if (prevButton == 10) {
-		textWindow->Clear();
 			numbers.clear();
 			operands.clear();
-			
+			textWindow->Clear();
 		}
 	}
 	int cases = id;
@@ -63,35 +62,35 @@ void CalculatorProcessor::ChangeTextBox(int id)
 		}
 		case 14:
 		{
-			if (numbers.size() > 3) {
+			if (numbers.size() >= 2) {
 				Calculate();
 			}
 			break;
 		}
 		case 15:
 		{
-			if (numbers.size() > 3) {
+			if (numbers.size() >= 2) {
 				Calculate();
 			}
 			break;
 		}
 		case 16:
 		{
-			if (numbers.size() > 3) {
+			if (numbers.size() >= 2) {
 				Calculate();
 			}
 			break;
 		}
 		case 17:
 		{
-			if (numbers.size() > 3) {
+			if (numbers.size() >= 2) {
 				Calculate();
 			}
 			break;
 		}
 		case 18:
 		{
-			if (numbers.size() > 3) {
+			if (numbers.size() >= 2) {
 				Calculate();
 			}
 			break;
@@ -141,7 +140,6 @@ void CalculatorProcessor::Calculate()
 		numbers.erase(std::next(numbers.begin(), 1), std::next(numbers.begin(), 2));
 		operands.erase(operands.begin());
 	}
-	*textWindow << " = ";
 	if (numbers[0] == (int)numbers[0]) {
 		*textWindow << (int)numbers[0];
 	}
