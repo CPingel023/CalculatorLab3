@@ -15,6 +15,7 @@ private:
 	wxTextCtrl* textWindow = nullptr;
 	std::vector<double> numbers;
 	std::vector<int> operands;
+	std::vector<int> binary;
 	int prevButton = 0;
 public:
 	CalculatorProcessor();

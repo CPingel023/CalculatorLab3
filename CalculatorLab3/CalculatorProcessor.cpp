@@ -47,7 +47,15 @@ void CalculatorProcessor::ChangeTextBox(int id)
 		}
 		case 11:
 		{
-			*textWindow << " binary ";
+			int binNum = (int)numbers[0];
+			while (binNum!= 0) {
+				binary.push_back(binNum % 2);
+				binNum /= 2;
+			}
+			for (int i = binary.size() - 1; i >= 0; i--) {
+				*textWindow << binary[i];
+			}
+			binary.clear();
 			break;
 		}
 		case 12:
@@ -62,37 +70,22 @@ void CalculatorProcessor::ChangeTextBox(int id)
 		}
 		case 14:
 		{
-			if (numbers.size() >= 2) {
-				Calculate();
-			}
 			break;
 		}
 		case 15:
 		{
-			if (numbers.size() >= 2) {
-				Calculate();
-			}
 			break;
 		}
 		case 16:
 		{
-			if (numbers.size() >= 2) {
-				Calculate();
-			}
 			break;
 		}
 		case 17:
 		{
-			if (numbers.size() >= 2) {
-				Calculate();
-			}
 			break;
 		}
 		case 18:
 		{
-			if (numbers.size() >= 2) {
-				Calculate();
-			}
 			break;
 		}
 		case 19:
