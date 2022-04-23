@@ -1,5 +1,6 @@
 #pragma once
 #include "wx/wx.h"
+#include "IBaseCommand.h"
 
 class CalculatorWindow;
 
@@ -14,8 +15,9 @@ public:
 private:
 	wxTextCtrl* textWindow = nullptr;
 	std::vector<double> numbers;
-	std::vector<int> operands;
+	std::vector<IBaseCommand*> operators;
 	std::vector<int> binary;
+	std::vector<int> operators2;
 	int prevButton = 0;
 public:
 	CalculatorProcessor();

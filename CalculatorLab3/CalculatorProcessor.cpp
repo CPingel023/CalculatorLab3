@@ -20,125 +20,116 @@ void CalculatorProcessor::CreateTextWindow(CalculatorWindow* parent)
 
 void CalculatorProcessor::ChangeTextBox(int id)
 {
-	if (prevButton >= 10) {
-		if (prevButton == 10) {
-			numbers.clear();
-			operands.clear();
-			textWindow->Clear();
-		}
-	}
 	int cases = id;
 	prevButton = cases;
 	if (cases < 10) {
 		*textWindow << cases;
-
 	}
 	else {
+
 		wxString textVal = textWindow->GetValue();
-		operands.push_back(id);
 		float value = SaveValues(textVal);
 		numbers.push_back(value);
 		textWindow->Clear();
-		switch (cases) {
-		case 10:
-		{
-			Calculate();
-			break;
-		}
-		case 11:
-		{
-			int binNum = (int)numbers[0];
-			while (binNum!= 0) {
-				binary.push_back(binNum % 2);
-				binNum /= 2;
+		operators2.push_back(id);
+		if (numbers.size() >= 2) {
+			switch (cases) {
+			case 10:
+			{
+				for (int i = 0; i < operators2.size(); i++) {
+					if (operators2[i] == 14) {
+						AddCommand* adder = new AddCommand(numbers[i], numbers[i+1]);
+						operators.push_back(adder);
+					}
+					else if (operators2[i] == 15) {
+						SubtractCommand* adder = new SubtractCommand(numbers[i], numbers[i+1]);
+						operators.push_back(adder);
+					}
+				}
+				Calculate();
+				break;
 			}
-			for (int i = binary.size() - 1; i >= 0; i--) {
-				*textWindow << binary[i];
+			case 11:
+			{
+				int binNum = (int)numbers[0];
+				while (binNum != 0) {
+					binary.push_back(binNum % 2);
+					binNum /= 2;
+				}
+				for (int i = binary.size() - 1; i >= 0; i--) {
+					*textWindow << binary[i];
+				}
+				binary.clear();
+				break;
 			}
-			binary.clear();
-			break;
-		}
-		case 12:
-		{
-			*textWindow << " hexadecimal ";
-			break;
-		}
-		case 13:
-		{
-			*textWindow << " decimal ";
-			break;
-		}
-		case 14:
-		{
-			break;
-		}
-		case 15:
-		{
-			break;
-		}
-		case 16:
-		{
-			break;
-		}
-		case 17:
-		{
-			break;
-		}
-		case 18:
-		{
-			break;
-		}
-		case 19:
-		{
-			//textWindow->Clear();
-			textWindow->Clear();
-			numbers[0] = numbers[0] * -1;
-			*textWindow << numbers[0];
-			break;
-		}
-		case 20:
-		{
-			SaveValues(textVal);
-			textWindow->Clear();
-			numbers.clear();
-			operands.clear();
-		}
+			case 12:
+			{
+				*textWindow << " hexadecimal ";
+				break;
+			}
+			case 13:
+			{
+				*textWindow << " decimal ";
+				break;
+			}
+			case 19:
+			{
+				//textWindow->Clear();
+				textWindow->Clear();
+				numbers[0] = numbers[0] * -1;
+				*textWindow << numbers[0];
+				break;
+			}
+			case 20:
+			{
+				SaveValues(textVal);
+				textWindow->Clear();
+			}
+			}
 		}
 	}
-
 }
 
 
 void CalculatorProcessor::Calculate()
 {
-	while (numbers.size() > 1) {
-		if (operands[0] == 14)
-		{
-			numbers[0] = numbers[0] + numbers[1];
+	double answer = 0;
+	for (int i = 0; i < operators.size(); i++) {
+		if (i - 1 >= 0) {
+			operators[i]->setFirst(answer);
+		}
+		answer = operators[i]->Execute();
+		//if (operands[0] == 14)
+		//{
+		//	/*numbers[i+1] = numbers[i] + numbers[i+1];*/
+		//	AddCommand adder(numbers[i], numbers[i + 1], numbers, i + 1);
+		//	adder.Execute();
 
-		}
-		else if (operands[0] == 15) {
-			numbers[0] = numbers[0] - numbers[1];
+		//}
+		//else if (operands[0] == 15) {
+		//	numbers[i+1] = numbers[i] - numbers[i+1];
 
-		}
-		else if (operands[0] == 16) {
-			numbers[0] = numbers[0] * numbers[1];
-		}
-		else if (operands[0] == 17) {
-			numbers[0] = numbers[0] / numbers[1];
-		}
-		else if (operands[0] == 18) {
-			numbers[0] = (int)numbers[0] % (int)numbers[1];
-		}
-		numbers.erase(std::next(numbers.begin(), 1), std::next(numbers.begin(), 2));
-		operands.erase(operands.begin());
+		//}
+		//else if (operands[0] == 16) {
+		//	numbers[i+1] = numbers[i] * numbers[i+1];
+		//}
+		//else if (operands[0] == 17) {
+		//	numbers[i+1] = numbers[i] / numbers[i+1];
+		//}
+		//else if (operands[0] == 18) {
+		//	numbers[i+1] = (int)numbers[i] % (int)numbers[i+1];
+		//}
+		//operands.erase(operands.begin());
 	}
-	if (numbers[0] == (int)numbers[0]) {
-		*textWindow << (int)numbers[0];
+	if (answer == (int)answer) {
+		*textWindow << (int)answer;
 	}
 	else {
-		*textWindow << numbers[0];
+		*textWindow << answer;
 	}
+	operators.clear();
+	numbers.clear();
+	operators2.clear();
 }
 
 double CalculatorProcessor::SaveValues(wxString toSave)
