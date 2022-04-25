@@ -42,11 +42,11 @@ void CalculatorProcessor::ChangeTextBox(int id)
 			{
 				for (int i = 0; i < operators2.size(); i++) {
 					if (operators2[i] == 14) {
-						AddCommand* adder = new AddCommand(numbers[i], numbers[i+1]);
+						AddCommand* adder = new AddCommand(numbers[i], numbers[i + 1]);
 						operators.push_back(adder);
 					}
 					else if (operators2[i] == 15) {
-						SubtractCommand* subber = new SubtractCommand(numbers[i], numbers[i+1]);
+						SubtractCommand* subber = new SubtractCommand(numbers[i], numbers[i + 1]);
 						operators.push_back(subber);
 					}
 					else if (operators2[i] == 16) {
@@ -62,9 +62,14 @@ void CalculatorProcessor::ChangeTextBox(int id)
 						operators.push_back(moder);
 					}
 				}
-				Calculate();
-				break;
 			}
+
+			Calculate();
+			break;
+			}
+		}
+		switch (cases)
+			{
 			case 11:
 			{
 				int binNum = (int)numbers[0];
@@ -100,7 +105,10 @@ void CalculatorProcessor::ChangeTextBox(int id)
 			{
 				SaveValues(textVal);
 				textWindow->Clear();
-			}
+				numbers.clear();
+				binary.clear();
+				operators.clear();
+				operators2.clear();
 			}
 		}
 	}
