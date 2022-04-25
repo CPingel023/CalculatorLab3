@@ -10,6 +10,10 @@ CalculatorProcessor::CalculatorProcessor()
 
 }
 
+CalculatorProcessor::~CalculatorProcessor()
+{
+}
+
 void CalculatorProcessor::CreateTextWindow(CalculatorWindow* parent)
 {
 	textWindow = new wxTextCtrl(parent, 125, "0", wxPoint(0, 0), wxSize(375, 130), wxTE_RIGHT);
@@ -42,8 +46,20 @@ void CalculatorProcessor::ChangeTextBox(int id)
 						operators.push_back(adder);
 					}
 					else if (operators2[i] == 15) {
-						SubtractCommand* adder = new SubtractCommand(numbers[i], numbers[i+1]);
-						operators.push_back(adder);
+						SubtractCommand* subber = new SubtractCommand(numbers[i], numbers[i+1]);
+						operators.push_back(subber);
+					}
+					else if (operators2[i] == 16) {
+						MultCommand* multer = new MultCommand(numbers[i], numbers[i + 1]);
+						operators.push_back(multer);
+					}
+					else if (operators2[i] == 17) {
+						DivCommand* diviser = new DivCommand(numbers[i], numbers[i + 1]);
+						operators.push_back(diviser);
+					}
+					else if (operators2[i] == 18) {
+						ModCommand* moder = new ModCommand(numbers[i], numbers[i + 1]);
+						operators.push_back(moder);
 					}
 				}
 				Calculate();

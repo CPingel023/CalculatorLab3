@@ -34,7 +34,6 @@ class SubtractCommand : public IBaseCommand {
 private:
 	double subFirst;
 	double subSecond;
-	std::vector<double> temp;
 public:
 	SubtractCommand(double first, double second) {
 		subFirst = first;
@@ -48,6 +47,69 @@ public:
 	}
 	double getSecond() {
 		return subSecond;
+	}
+};
+
+class MultCommand : public IBaseCommand {
+private:
+	double multFirst;
+	double multSecond;
+
+public:
+	MultCommand(double first, double second) {
+		multFirst = first;
+		multSecond = second;
+	}
+	double Execute() {
+		return multFirst * multSecond;
+	}
+	void setFirst(double mult) {
+		multFirst = mult;
+	}
+	double getSecond() {
+		return multSecond;
+	}
+};
+
+class DivCommand : public IBaseCommand {
+private:
+	double divFirst;
+	double divSecond;
+
+public:
+	DivCommand(double first, double second) {
+		divFirst = first;
+		divSecond = second;
+	}
+	double Execute() {
+		return divFirst / divSecond;
+	}
+	void setFirst(double mult) {
+		divFirst = mult;
+	}
+	double getSecond() {
+		return divSecond;
+	}
+};
+
+class ModCommand : public IBaseCommand {
+private:
+	double modFirst;
+	double modSecond;
+
+public:
+	ModCommand(double first, double second) {
+		modFirst = first;
+		modSecond = second;
+	}
+	double Execute() {
+		return (int)modFirst % (int)modSecond;
+	}
+	void setFirst(double mult) {
+		modFirst = mult;
+	}
+	double getSecond() {
+		return modSecond;
 	}
 };
 

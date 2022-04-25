@@ -21,6 +21,7 @@ private:
 	int prevButton = 0;
 public:
 	CalculatorProcessor();
+	~CalculatorProcessor();
 	CalculatorProcessor(CalculatorProcessor const&) = delete;
 	void operator= (CalculatorProcessor const&) = delete;
 	void CreateTextWindow(CalculatorWindow* parent);
