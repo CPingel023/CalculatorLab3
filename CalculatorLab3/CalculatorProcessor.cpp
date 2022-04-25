@@ -1,5 +1,6 @@
 #include "CalculatorProcessor.h"
 #include "CalculatorWindow.h"
+#include <iomanip>
 wxFont fontTextBox(24, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRAHEAVY, false);
 
 	
@@ -74,23 +75,70 @@ void CalculatorProcessor::ChangeTextBox(int id)
 			{
 				int binNum = (int)numbers[0];
 				while (binNum != 0) {
-					binary.push_back(binNum % 2);
+					binhex.push_back(binNum % 2);
 					binNum /= 2;
 				}
-				for (int i = binary.size() - 1; i >= 0; i--) {
-					*textWindow << binary[i];
+				numbers.clear();
+				for (int i = binhex.size() - 1; i >= 0; i--) {
+					*textWindow << (int)binhex[i];
 				}
-				binary.clear();
+				binhex.clear();
+				prevConversion = 11;
 				break;
 			}
 			case 12:
 			{
-				*textWindow << " hexadecimal ";
+				bool binary = BinaryCheck(textVal);
+				int hexNum = (int)numbers[0];
+				if (binary) {
+					hexNum = BinaryToDecimal(hexNum);
+				}
+				while (hexNum != 0)
+				{
+					int temp = hexNum % 16;
+					if (temp < 10) {
+						binhex.push_back(temp % 16 + 48);
+					}
+					else {
+						binhex.push_back(temp % 16 + 55);
+					}
+					hexNum /= 16;
+				}
+				
+				numbers.clear();
+				*textWindow << "0x";
+				for (int i = binhex.size() - 1; i >= 0; i--) {
+					*textWindow << binhex[i];
+				}
+				prevConversion = 12;
+				binhex.clear();
 				break;
 			}
 			case 13:
 			{
-				*textWindow << " decimal ";
+				bool binary = BinaryCheck(textVal);
+				int num = numbers[0];
+				numbers.clear();
+				if (binary) {
+					int saveTemp = BinaryToDecimal(num);
+					*textWindow << saveTemp;
+				}
+				else {
+					int length = textVal.size();
+					int base = 1;
+					int saveTemp = 0;
+					for (int i = length - 1; i > 1; i--) {
+						if (textVal[i] >= '0' && textVal[i] <= '9') {
+							saveTemp += ((int)textVal[i] - 48) * base;
+							base = base * 16;
+						}
+						else if(textVal[i] >= 'A' && textVal[i] <= 'F') {
+							saveTemp += ((int)textVal[i] - 55) * base;
+							base = base * 16;
+						}
+					}
+					*textWindow << saveTemp;
+				}
 				break;
 			}
 			case 19:
@@ -106,7 +154,7 @@ void CalculatorProcessor::ChangeTextBox(int id)
 				SaveValues(textVal);
 				textWindow->Clear();
 				numbers.clear();
-				binary.clear();
+				binhex.clear();
 				operators.clear();
 				operators2.clear();
 			}
@@ -162,4 +210,29 @@ double CalculatorProcessor::SaveValues(wxString toSave)
 	if (!toSave.ToDouble(&value)) {
 	}
 	return value;
+}
+
+bool CalculatorProcessor::BinaryCheck(wxString temp)
+{
+	for (int i = 0; i < temp.size(); i++) {
+		if ((int)temp[i] - 48 > 1) {
+			return false;
+			break;
+		}
+	}
+	return true;
+}
+
+int CalculatorProcessor::BinaryToDecimal(int num)
+{
+	int saveTemp = 0;
+	int base = 1;
+	while (num) {
+		int lastDigit = num % 10;
+		num = num / 10;
+		saveTemp += lastDigit * base;
+
+		base = base * 2;
+	}
+	return saveTemp;
 }
