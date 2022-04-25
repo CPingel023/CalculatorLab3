@@ -123,7 +123,7 @@ void CalculatorProcessor::ChangeTextBox(int id)
 					int saveTemp = BinaryToDecimal(num);
 					*textWindow << saveTemp;
 				}
-				else {
+				else if(textVal.Contains("0x")) {
 					int length = textVal.size();
 					int base = 1;
 					int saveTemp = 0;
