@@ -52,12 +52,15 @@ void CalculatorProcessor::ChangeTextBox(int id)
 					}
 					else if (operators2[i] == 15) {
 						SubtractCommand* subber = new SubtractCommand(numbers[i], numbers[i + 1]);
+						operators.push_back(subber);
 					}
 					else if (operators2[i] == 16) {
 						MultCommand* multer = new MultCommand(numbers[i], numbers[i + 1]);
+						operators.push_back(multer);
 					}
 					else if (operators2[i] == 17) {
 						DivCommand* diviser = new DivCommand(numbers[i], numbers[i + 1]);
+						operators.push_back(diviser);
 					}
 					else if (operators2[i] == 18) {
 						ModCommand* moder = new ModCommand(numbers[i], numbers[i + 1]);
@@ -144,7 +147,7 @@ void CalculatorProcessor::ChangeTextBox(int id)
 			}
 			case 19:
 			{
-				//textWindow->Clear();
+				textWindow->Clear();
 				textWindow->Clear();
 				numbers[0] = numbers[0] * -1;
 				*textWindow << numbers[0];
@@ -153,7 +156,7 @@ void CalculatorProcessor::ChangeTextBox(int id)
 			case 20:
 			{
 				SaveValues(textVal);
-				//textWindow->Clear();
+				textWindow->Clear();
 				numbers.clear();
 				binhex.clear();
 				operators.clear();
