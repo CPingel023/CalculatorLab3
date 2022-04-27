@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{3b09a170-6f78-41de-8f23-08e8d31cf2a8}</ProjectGuid>
+    <ProjectGuid>{aa4d1f4b-954c-4aba-940d-36a26e898a4f}</ProjectGuid>
     <RootNamespace>CalculatorLab3Tests</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -86,7 +86,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Widgets\include;C:\Widgets\include\msvc</AdditionalIncludeDirectories>
     </ClCompile>
@@ -146,7 +146,9 @@
     <ClCompile Include="..\CalculatorLab3\CalculatorProcessor.cpp" />
     <ClCompile Include="..\CalculatorLab3\CalculatorWindow.cpp" />
     <ClCompile Include="..\CalculatorLab3\IBaseCommand.cpp" />
-    <ClCompile Include="CalculatorLabTests.cpp" />
+    <ClCompile Include="ButtonFactoryTests.cpp" />
+    <ClCompile Include="CalculatorLab3Tests.cpp" />
+    <ClCompile Include="CalculatorProcessorTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\CalculatorLab3\App.h" />
@@ -154,7 +156,8 @@
     <ClInclude Include="..\CalculatorLab3\CalculatorProcessor.h" />
     <ClInclude Include="..\CalculatorLab3\CalculatorWindow.h" />
     <ClInclude Include="..\CalculatorLab3\IBaseCommand.h" />
-    <ClInclude Include="CalculatorLabTests.h" />
+    <ClInclude Include="ButtonFactoryTests.h" />
+    <ClInclude Include="CalculatorProcessorTests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

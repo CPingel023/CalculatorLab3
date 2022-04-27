@@ -20,6 +20,7 @@ private:
 	std::vector<int> operators2;
 	int prevButton = 0;
 	int prevConversion = 0;
+	double answer;
 public:
 	CalculatorProcessor();
 	~CalculatorProcessor();
@@ -31,5 +32,13 @@ public:
 	double SaveValues(wxString toSave);
 	bool BinaryCheck(wxString temp);
 	int BinaryToDecimal(int num);
+	void AddNumsToNumbers(float numb);
+	void AddOperation(int id);
+	double GetAnswer() {
+		return answer;
+	}
+	std::vector<int> DecimalToBinary(int num);	
+	std::string DecimalToHex(int num);
+	int HexToDecimal(std::string hexNum);
 };
 

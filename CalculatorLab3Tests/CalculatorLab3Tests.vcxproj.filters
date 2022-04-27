@@ -15,6 +15,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CalculatorLab3Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\CalculatorLab3\App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -30,12 +33,15 @@
     <ClCompile Include="..\CalculatorLab3\IBaseCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CalculatorLabTests.cpp">
+    <ClCompile Include="CalculatorProcessorTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonFactoryTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CalculatorLabTests.h">
+    <ClInclude Include="..\CalculatorLab3\IBaseCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\CalculatorLab3\App.h">
@@ -50,7 +56,10 @@
     <ClInclude Include="..\CalculatorLab3\CalculatorWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\CalculatorLab3\IBaseCommand.h">
+    <ClInclude Include="CalculatorProcessorTests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonFactoryTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -13,6 +13,9 @@ CalculatorProcessor::CalculatorProcessor()
 
 CalculatorProcessor::~CalculatorProcessor()
 {
+	for (int i = 0; i < operators.size(); i++) {
+		delete operators[i];
+	}
 }
 
 void CalculatorProcessor::CreateTextWindow(CalculatorWindow* parent)
@@ -32,10 +35,11 @@ void CalculatorProcessor::ChangeTextBox(int id)
 	}
 	else {
 
-		wxString textVal = textWindow->GetValue();
+		wxString textVal = "";
+		/*wxString textVal = textWindow->GetValue();
 		float value = SaveValues(textVal);
 		numbers.push_back(value);
-		textWindow->Clear();
+		textWindow->Clear();*/
 		operators2.push_back(id);
 		if (numbers.size() >= 2) {
 			switch (cases) {
@@ -48,15 +52,12 @@ void CalculatorProcessor::ChangeTextBox(int id)
 					}
 					else if (operators2[i] == 15) {
 						SubtractCommand* subber = new SubtractCommand(numbers[i], numbers[i + 1]);
-						operators.push_back(subber);
 					}
 					else if (operators2[i] == 16) {
 						MultCommand* multer = new MultCommand(numbers[i], numbers[i + 1]);
-						operators.push_back(multer);
 					}
 					else if (operators2[i] == 17) {
 						DivCommand* diviser = new DivCommand(numbers[i], numbers[i + 1]);
-						operators.push_back(diviser);
 					}
 					else if (operators2[i] == 18) {
 						ModCommand* moder = new ModCommand(numbers[i], numbers[i + 1]);
@@ -152,7 +153,7 @@ void CalculatorProcessor::ChangeTextBox(int id)
 			case 20:
 			{
 				SaveValues(textVal);
-				textWindow->Clear();
+				//textWindow->Clear();
 				numbers.clear();
 				binhex.clear();
 				operators.clear();
@@ -165,40 +166,19 @@ void CalculatorProcessor::ChangeTextBox(int id)
 
 void CalculatorProcessor::Calculate()
 {
-	double answer = 0;
+	answer = 0;
 	for (int i = 0; i < operators.size(); i++) {
 		if (i - 1 >= 0) {
 			operators[i]->setFirst(answer);
 		}
 		answer = operators[i]->Execute();
-		//if (operands[0] == 14)
-		//{
-		//	/*numbers[i+1] = numbers[i] + numbers[i+1];*/
-		//	AddCommand adder(numbers[i], numbers[i + 1], numbers, i + 1);
-		//	adder.Execute();
-
-		//}
-		//else if (operands[0] == 15) {
-		//	numbers[i+1] = numbers[i] - numbers[i+1];
-
-		//}
-		//else if (operands[0] == 16) {
-		//	numbers[i+1] = numbers[i] * numbers[i+1];
-		//}
-		//else if (operands[0] == 17) {
-		//	numbers[i+1] = numbers[i] / numbers[i+1];
-		//}
-		//else if (operands[0] == 18) {
-		//	numbers[i+1] = (int)numbers[i] % (int)numbers[i+1];
-		//}
-		//operands.erase(operands.begin());
 	}
-	if (answer == (int)answer) {
+	/*if (answer == (int)answer) {
 		*textWindow << (int)answer;
 	}
 	else {
 		*textWindow << answer;
-	}
+	}*/
 	operators.clear();
 	numbers.clear();
 	operators2.clear();
@@ -235,4 +215,69 @@ int CalculatorProcessor::BinaryToDecimal(int num)
 		base = base * 2;
 	}
 	return saveTemp;
+}
+
+std::vector<int> CalculatorProcessor::DecimalToBinary(int num)
+{
+	std::vector<int> temp;
+	while (num) {
+		temp.push_back(num % 2);
+		num = num / 2;
+	}
+	return temp;
+}
+
+std::string CalculatorProcessor::DecimalToHex(int num)
+{
+	std::string endString = "0x";
+	std::string tempString = "";
+	int temp = num;
+	int calc;
+	while (temp != 0)
+	{
+		calc = temp % 16;
+		if (calc < 10) {
+			tempString += (calc + 48);
+		}
+		else {
+			tempString += (calc + 55);
+		}
+		temp /= 16;
+	}
+	for (int i = tempString.length()-1; i >= 0; i--) {
+		endString += tempString[i];
+	}
+	return endString;
+}
+
+int CalculatorProcessor::HexToDecimal(std::string hexNum)
+{
+	int length = hexNum.size();
+	int base = 1;
+	int saveTemp = 0;
+	for (int i = length - 1; i > 1; i--) {
+		if (hexNum[i] >= '0' && hexNum[i] <= '9') {
+			saveTemp += ((int)hexNum[i] - 48) * base;
+			base = base * 16;
+		}
+		else if (hexNum[i] >= 'A' && hexNum[i] <= 'F') {
+			saveTemp += ((int)hexNum[i] - 55) * base;
+			base = base * 16;
+		}
+	}
+	return saveTemp;
+}
+
+
+
+
+
+void CalculatorProcessor::AddNumsToNumbers(float numb)
+{
+	numbers.push_back(numb);
+}
+
+void CalculatorProcessor::AddOperation(int id)
+{
+	operators2.push_back(id);
 }

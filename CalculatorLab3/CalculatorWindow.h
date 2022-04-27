@@ -13,7 +13,7 @@ private:
 	wxButton* fiveBtn = nullptr;
 	wxButton* sixBtn = nullptr;
 	wxButton* sevenBtn = nullptr;
-	wxButton* eightBtn = nullptr;
+	wxButton* eightBtn = nullptr;	
 	wxButton* nineBtn = nullptr;
 	wxButton* multiplBtn = nullptr;
 	wxButton* divBtn = nullptr;
