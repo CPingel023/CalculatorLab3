@@ -5,12 +5,20 @@ class ButtonFactoryTests
 {
 private: 
 	wxButton* testButton = nullptr;
-	ButtonFactory factory;
+	CalculatorWindow* dummyAddress = new CalculatorWindow();
+	ButtonFactory factory = ButtonFactory(dummyAddress);
 public:
-	bool Check5ButtonId(wxButton* _testButton);
-	bool CheckEqualButtonId(wxButton* _testButton);
-	bool CheckPlusButtonId(wxButton* _testButton);
-	bool CheckHexButtonId(wxButton* _testButton);
-	bool Check0ButtonId(wxButton* _testButton);
+	ButtonFactoryTests();
+	~ButtonFactoryTests();
+	bool Check5ButtonId();
+	bool CheckEqualButtonId();
+	bool CheckPlusButtonId();
+	bool CheckHexButtonId();
+	bool Check0ButtonId();
+	bool Check5ButtonColor();
+	bool CheckEqualButtonColor();
+	bool CheckPlusButtonColor();
+	bool CheckHexButtonColor();
+	bool Check0ButtonColor();
 };
 

@@ -9,6 +9,7 @@
 #include "../CalculatorLab3/CalculatorWindow.h"
 #include "../CalculatorLab3/IBaseCommand.h"
 #include "CalculatorProcessorTests.h"
+#include "ButtonFactoryTests.h"
 
 
 int main()
@@ -29,6 +30,69 @@ int main()
     test.Test150ToHex();
     test.Test0xFFToDecimal();
     test.Test1101011ToHex();
+
+
+    ButtonFactoryTests buttonTest = ButtonFactoryTests();
+    if (buttonTest.Check5ButtonId()) {
+        std::cout << "The id correctly went to 5." << std::endl;
+    }
+    else {
+        std::cout << "Button does not have id 5." << std::endl;
+    }
+    if (buttonTest.CheckEqualButtonId()) {
+        std::cout << "The id correctly went to 10." << std::endl;
+    }
+    else {
+        std::cout << "Button does not have id 10." << std::endl;
+    }
+    if (buttonTest.CheckPlusButtonId()) {
+        std::cout << "The id correctly went to 14." << std::endl;
+    }
+    else {
+        std::cout << "Button does not have id 14." << std::endl;
+    }
+    if (buttonTest.CheckHexButtonId()) {
+        std::cout << "The id correctly went to 12." << std::endl;
+    }
+    else {
+        std::cout << "Button does not have id 12." << std::endl;
+    }
+    if (buttonTest.Check0ButtonId()) {
+        std::cout << "The id correctly went to 0." << std::endl;
+    }
+    else {
+        std::cout << "Button does not have id 0." << std::endl;
+    }
+    if (buttonTest.Check5ButtonColor()) {
+        std::cout << "The color was added correctly." << std::endl;
+    }
+    else {
+        std::cout << "Button does not have correct back color." << std::endl;
+    }
+    if (buttonTest.CheckEqualButtonColor()) {
+        std::cout << "The color was added correctly." << std::endl;
+    }
+    else {
+        std::cout << "Button does not have correct back color." << std::endl;
+    }
+    if (buttonTest.CheckPlusButtonColor()) {
+        std::cout << "The color was added correctly." << std::endl;
+    }
+    else {
+        std::cout << "Button does not have correct back color." << std::endl;
+    }
+    if (buttonTest.CheckHexButtonColor()) {
+        std::cout << "The color was added correctly." << std::endl;
+    }
+    else {
+        std::cout << "Button does not have correct back color." << std::endl;
+    }
+    if (buttonTest.Check0ButtonColor()) {
+        std::cout << "The color was added correctly." << std::endl;
+    }
+    else {
+        std::cout << "Button does not have correct back color." << std::endl;
+    }
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
