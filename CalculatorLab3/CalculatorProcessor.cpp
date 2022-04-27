@@ -35,11 +35,11 @@ void CalculatorProcessor::ChangeTextBox(int id)
 	}
 	else {
 
-		wxString textVal = "";
-		/*wxString textVal = textWindow->GetValue();
+		/*wxString textVal = "";*/
+		wxString textVal = textWindow->GetValue();
 		float value = SaveValues(textVal);
 		numbers.push_back(value);
-		textWindow->Clear();*/
+		textWindow->Clear();
 		operators2.push_back(id);
 		if (numbers.size() >= 2) {
 			switch (cases) {
@@ -173,12 +173,12 @@ void CalculatorProcessor::Calculate()
 		}
 		answer = operators[i]->Execute();
 	}
-	/*if (answer == (int)answer) {
+	if (answer == (int)answer) {
 		*textWindow << (int)answer;
 	}
 	else {
 		*textWindow << answer;
-	}*/
+	}
 	operators.clear();
 	numbers.clear();
 	operators2.clear();
